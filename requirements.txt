@@ -1,8 +1,8 @@
-update: added requirements.txt
 streamlit
 openai
 python-dotenv
 numpy
-faiss-cpu
 tiktoken
 pypdf
+sentence-transformers
+chromadb
