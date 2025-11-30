@@ -6,3 +6,4 @@ tiktoken
 pypdf
 sentence-transformers
 chromadb
+faiss-cpu

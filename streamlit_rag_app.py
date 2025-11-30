@@ -15,7 +15,7 @@ import numpy as np
 
 
 st.set_page_config(page_title="Promotions RAG", layout="wide")
-st.title("Retail Promotions RAG (FAISS)")
+st.title("Retail Promotions RAG (FAISS)"    )
 
 # config
 DEFAULT_CSV = "promotions_6000.csv"
