@@ -12,36 +12,6 @@ import pandas as pd
 import numpy as np
 # streamlit_rag_app.py — top of file
 # --- START: FAISS optional fallback setup ---
-# Try to use FAISS if it's available in environment; otherwise fall back to Chroma (safe for cloud)
-USE_FAISS = False
-try:
-    import faiss  # noqa: F401
-    USE_FAISS = True
-except Exception as _faiss_err:
-    # FAISS not available — we'll use chromadb fallback (works in almost all managed hosts)
-    USE_FAISS = False
-
-if USE_FAISS:
-    # If you have FAISS-specific initialization, it can remain below.
-    # Example placeholder — replace/keep your existing FAISS init if present.
-    import faiss  # actual faiss usage in your code can continue as before
-    print("Using FAISS index (faiss imported).")
-else:
-    # Chroma fallback initialization — safe for deployments where faiss isn't installable
-    print("FAISS not available — using chromadb fallback.")
-    try:
-        import chromadb
-        from chromadb.config import Settings
-        chroma_client = chromadb.Client(Settings(chroma_db_impl="duckdb+parquet", persist_directory=None))
-        # ensure collection variable name matches what your app expects
-        try:
-            collection = chroma_client.get_collection(name="docs")
-        except Exception:
-            collection = chroma_client.create_collection(name="docs")
-    except Exception as e:
-        # If chromadb import itself fails, raise a clear error
-        raise RuntimeError("Chromadb fallback failed to initialize: " + str(e))
-# --- END: FAISS optional fallback setup ---
 
 
 st.set_page_config(page_title="Promotions RAG", layout="wide")
