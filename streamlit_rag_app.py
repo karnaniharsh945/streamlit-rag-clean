@@ -10,6 +10,23 @@ import streamlit as st
 import os, time, pickle, io
 import pandas as pd
 import numpy as np
+# streamlit_rag_app.py — top of file
+try:
+    import faiss
+    USE_FAISS = True
+except Exception:
+    USE_FAISS = False
+
+if USE_FAISS:
+    # existing FAISS-based index init
+    pass
+else:
+    # fallback: chroma in-memory
+    import chromadb
+    from chromadb.config import Settings
+    client = chromadb.Client(Settings(chroma_db_impl="duckdb+parquet", persist_directory=None))
+    collection = client.get_or_create_collection(name="docs")
+
 
 st.set_page_config(page_title="Promotions RAG", layout="wide")
 st.title("Retail Promotions RAG (FAISS)")
